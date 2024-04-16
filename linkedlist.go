@@ -42,8 +42,22 @@ func removeNode(data int) bool {
 
 }
 
-func insertNode() {
+func insertNode(data int, pos int) {
+	cur := head
 
+	for cur != nil && pos != 0 {
+		pos--
+
+	}
+
+	if pos != 0 {
+		fmt.Println("Requested postion too far")
+		return
+	}
+
+	new := Node{data, cur.next}
+	cur.next = &new
+	fmt.Println("Node Inserted!")
 }
 
 func printList() {
@@ -73,6 +87,7 @@ func main() {
 
 	var option int
 	var new int
+	var pos int
 	for option != 5 {
 		printMenu()
 		fmt.Scan(&option)
@@ -95,8 +110,12 @@ func main() {
 				fmt.Println("Node not found")
 			}
 		case 3:
-			insertNode()
-			fmt.Println("Node Inserted!")
+			fmt.Println("What data should be added?")
+			fmt.Scan(&new)
+			fmt.Println("Where should that data be added")
+			fmt.Scan(&pos)
+			insertNode(new, pos)
+			break
 		case 4:
 			printList()
 		case 5:
