@@ -21,7 +21,24 @@ func addNode(data int) {
 
 }
 
-func removeNode() {
+func removeNode(data int) bool {
+	cur := head
+	prev := head
+	for cur != nil {
+
+		if cur.data == data {
+			if cur == head {
+				head = cur.next
+			} else {
+				prev.next = cur.next
+			}
+			return true
+		}
+		prev = cur
+		cur = cur.next
+
+	}
+	return false
 
 }
 
@@ -39,11 +56,12 @@ func printList() {
 		cur = cur.next
 
 	}
+	fmt.Printf("\n")
 
 }
 
 func printMenu() {
-	fmt.Println("\nWhat operation would you like to do?")
+	fmt.Println("What operation would you like to do?")
 	fmt.Println("1. Add")
 	fmt.Println("2. Remove")
 	fmt.Println("3. Insert")
@@ -54,6 +72,7 @@ func printMenu() {
 func main() {
 
 	var option int
+	var new int
 	for option != 5 {
 		printMenu()
 		fmt.Scan(&option)
@@ -61,13 +80,20 @@ func main() {
 		case 1:
 
 			fmt.Println("What value should be added?")
-			var new int
+
 			fmt.Scan(&new)
 			addNode(new)
 			fmt.Println("Node Added!")
+			break
 		case 2:
-			removeNode()
-			fmt.Println("Node Removed!")
+			fmt.Println("What value should be removed?")
+			fmt.Scan(&new)
+			x := removeNode(new)
+			if x {
+				fmt.Println("Node Removed!")
+			} else {
+				fmt.Println("Node not found")
+			}
 		case 3:
 			insertNode()
 			fmt.Println("Node Inserted!")
